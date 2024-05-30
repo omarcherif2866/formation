@@ -1,0 +1,58 @@
+<div class="courses-container">
+  <div *ngFor="let session of sessions" class="course-card">
+    <h3>{{ session.nomSession }}</h3>
+    <p>Date : {{ session.date }}</p>
+    <button (click)="onSelectSession(session)">Voir les formations</button>
+  </div>
+</div>
+
+<br>
+
+<div class="courses-container"  *ngIf="selectedSession">
+  <i class="fa fa-graduation-cap"></i>
+  <h3>Formations de la session {{ selectedSession.nomSession }}</h3>
+</div>
+<br>
+<div class="courses-container"  *ngIf="selectedSession">
+  <div *ngFor="let formation of formations" class="course-card">
+    <h3>Titre : {{ formation.titre }}</h3>
+    <p>Description : {{ formation.description }}</p>
+    
+    <div class="button-container">
+      <!-- Button to  access the formation with Paypal -->
+      <button class="btn-icon access-btn"  (click)="showPayPal = true">
+        <i class="fas fa-arrow-circle-right"></i>
+      </button>
+      
+      <!-- Button to always access the formation  -->
+      <!-- <button class="btn-icon access-btn"  [routerLink]="['/Formations', formation._id]">
+        <i class="fas fa-arrow-circle-right"></i>
+      </button> -->
+
+      <!-- Conditional buttons for formateur -->
+      <div *ngIf="isFormateur">
+        <input type="file" (change)="onFileSelectedAndAddPDF($event, formation._id)" accept=".pdf" #pdfInput id="pdfInput" style="display: none">
+        <button class="btn-icon upload-btn" (click)="pdfInput.click()">
+          <i class="fas fa-cloud-upload-alt"></i>
+        </button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<br>
+<br>
+
+<!-- Bloc PayPal -->
+<div class="container" *ngIf="showPayPal">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 text-center">
+      <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    </div>
+  </div>
+</div>
+
+
+

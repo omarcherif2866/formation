@@ -1,0 +1,41 @@
+
+  
+  .container {
+    background-color: #141b41; /* Bleu foncé */
+    color: #ffffff; /* Texte blanc */
+  }
+  
+  .form-group label {
+    color: #faf8f8; /* Rouge */
+  }
+  
+  .btn-primary {
+    background-color: #ff0000; /* Rouge */
+    border-color: #ff0000; /* Rouge */
+  }
+  
+  .btn-primary:hover {
+    background-color: #cc0000; /* Rouge plus sombre au survol */
+    border-color: #cc0000; /* Rouge plus sombre au survol */
+  }
+  
+  .btn-danger {
+    background-color: #1a1a1a; /* Noir */
+    border-color: #1a1a1a; /* Noir */
+    color: #ffffff; /* Texte blanc */
+  }
+  
+  .btn-danger:hover {
+    background-color: #333333; /* Noir plus sombre au survol */
+    border-color: #333333; /* Noir plus sombre au survol */
+  }
+  
+  /* Style pour les messages */
+  .message {
+    background-color: #1a1a1a; /* Noir */
+    color: #ffffff; /* Texte blanc */
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+  

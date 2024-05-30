@@ -1,0 +1,80 @@
+
+  <div style="text-align: center">
+    <div class="profile-top">
+      <mat-card class="product-box-shop" *ngIf="user" [ngClass]="{'text-center': !fullWidthMode}">
+        <div [ngClass]="{'flex': fullWidthMode}">
+          <div>
+            <img class="mb-1 mx-auto"
+            [ngClass]="{'h-[360px]': fullWidthMode}" 
+            [src]="imageUrl || getProfileImageUrl(user.image)"
+            class="img-fluid" 
+            alt="profile image" 
+            [width]="200"
+            [height]="100"
+            style="border-radius: 100px">       
+            </div>    
+            <div class="profile-detail">
+              <h5>{{user.nom }}</h5>
+              <h6>{{user.adresse }}</h6>
+            </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  
+  <div class="profile-content">
+    <div class="row dashboard-info">
+      <div class="col-lg-9">
+        <div class="card dash-cards">
+          <div class="card-header">
+            <h4>Profile Details</h4>																
+          </div>
+          <div class="card-body">
+            <div class="profile-form">
+                <form [formGroup]="ProfileForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label class="col-form-label">Username</label>
+                      <div class="pass-group group-img">
+                        <span class="lock-icon"><i class="feather-user"></i></span>
+                        <input type="text" class="form-control" formControlName="nom">
+                      </div> 
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                          <label class="col-form-label">Adresse Email</label>
+                          <div class="group-img">
+                            <i class="feather-mail"></i>
+                            <input type="email" class="form-control" formControlName="adresse">
+                          </div>
+                        </div>
+                      </div>											
+                    </div>	
+                    <div class="form-group">
+                        <input formControlName="image" #fileInput type="file" class="form-control" (change)="onFileSelected($event)">
+                      </div>
+                      
+                    <button class="btn btn-primary w-100 login-btn" type="submit">Update Profile</button>
+                  </form>
+                  
+            </div> 
+          </div>								
+        </div>	
+      </div>
+  
+      <!-- <div class="col-lg-3">
+        <div class="profile-sidebar">
+          <div class="card">
+            <div class="card-header">
+              <h4>Changer Mot de Passe</h4>
+            </div>	
+            <div class="card-body">
+
+                <button class="btn btn-primary" [routerLink]="['/changermotdepasse', idUser]"> Changer Mot de Passe</button>											
+            </div>  									
+          </div>							
+        </div>
+      </div>							 -->
+    </div>				
+  </div>
+  

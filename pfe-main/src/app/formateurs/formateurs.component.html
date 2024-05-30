@@ -1,0 +1,71 @@
+
+
+<div class="container" *ngIf="afficherPremierBloc">
+  <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+      <div class="row no-gutters">
+        <div class="col-lg-4">
+          <img src="../../assets/im inscri.webp" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-lg-8">
+          <div class="card-body">
+            <h1 class="h4 text-gray-900 mb-4">Creéer un compte</h1>
+
+
+          <!-- Bouton pour afficher le formulaire de création de compte -->
+
+          <form  (submit)="creerCompte()" [formGroup]="form" id="createForm" enctype="multipart/form-data">
+            <div class="container">
+              <div class="form-group row input-group-sm mb-3">
+                <label for="exampleFormControlInput1"  class="col-sm-3 col-form-label">Nom complet</label> 
+                  <div class="col-sm-9">
+                    <input type="text" name="nom complet" formControlName="nom" required class="form-control" placeholder="Nom complet">
+                  </div> 
+              </div>
+              <div class="form-group row input-group-sm mb-3">
+                <label for="exampleFormControlInput1"  class="col-sm-3 col-form-label">Adresse email</label> 
+                  <div class="col-sm-9">
+                    <input type="email" name="email" formControlName="adresse" required  class="form-control" placeholder="nom@exemple.com">
+                  </div>
+              </div>
+              <div class="form-group row   input-group-sm mb-3">
+                <label for="inputPassword" class="col-sm-3 col-form-label">Mot de passe</label>
+                  <div class="col-sm-9">
+                    <input type="password" name=" Créer un Mot de passe" formControlName="motdepasse" required class="form-control" id="inputPassword" placeholder="Mot de passe">
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <input type="file" class="form-control" (change)="onFileSelected($event)">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Créer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+<!-- Bloc à afficher après la création du compte -->
+<div class="container" *ngIf="!afficherPremierBloc">
+  <h2>Mettez vos CV et vos lettres de motivations</h2>
+  <div class="courses-container">
+    <div class="course-card">
+      <label for="file">Télécharger un fichier :</label>
+      <!-- Vous devez passer l'ID du formateur à la fonction onFileSelectedAndAddPDF -->
+      <input type="file" (change)="onFileSelectedAndAddPDF($event, formateurId)" accept=".pdf" #pdfInput id="pdfInput" style="display: none" multiple>
+      <button class="btn-icon upload-btn" (click)="pdfInput.click()">
+        <i class="fas fa-cloud-upload-alt"></i> Envoyer
+      </button>
+      <p>{{ message }}</p>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/Logo">
+    <img src="assets\logo.png" height="80">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/Acceuil">Acceuil <span class="sr-only"></span></a>
+      </li>
+
+      <!-- Dropdown menu -->
+      <li class="nav-item dropdown" (mouseenter)="showDropdown = true" (mouseleave)="showDropdown = false">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          Domaines
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" [class.show]="showDropdown">
+          <a *ngFor="let domaine of domaines" class="dropdown-item" (click)="redirectToDomaineCours(domaine._id)">{{ domaine.type }}</a>
+        </div>
+      </li>
+      
+      
+      
+      
+      <!-- Other nav items -->
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Discussion">Discussion</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" [routerLink]="['/formateurs', idUser]">Formateurs</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a class="nav-link" routerLink="/admin">Administrateur</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="authenticated; else signInLink" (click)="logout()">Se déconnecter</a>
+        <ng-template #signInLink>
+          <a class="nav-link" routerLink="/Inscrivez-vous">Se connecter</a>
+        </ng-template>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/profil', idUser]">Profil</a>
+      </li>
+    </ul>
+
+    <!-- Search form -->
+    <!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
+    </form>
+    <button class="btn btn-danger my-2 my-sm-0" type="submit">Recherche</button> -->
+
+  </div>
+</nav>

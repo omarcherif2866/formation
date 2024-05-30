@@ -1,0 +1,99 @@
+
+<div class="container mt-5">
+  <carousel>
+    <slide *ngFor="let slide of slides; let index = index" [active]="index === 0">
+      <img [src]="slide.image" alt="Image slide" class="d-block w-100">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>{{ slide.title }}</h5>
+        <p>{{ slide.description }}</p>
+        <a routerLink="/inscrivez-vous" class="btn bg-danger" (click)="goToInscrire()">Inscrivez-vous</a>
+      </div>
+    </slide>
+  </carousel>
+</div>
+
+
+
+
+<!-- Présentation de l'administratrice -->
+<div class="container mt-4">
+  <div class="row justify-content-start">
+    <div class="col-md-6">
+      <div class="card bg-danger mb-3 text-white">
+        <div class="card-body">
+          <h2 class="card-title mb-4">En savoir plus sur nous</h2>
+          <p *ngIf="!showMoreContent" class="card-text">
+            <strong>Nom :</strong> Chebbi Ameni <br>
+            <strong>Poste :</strong> Administratrice de Formaline <br>
+            <strong>À propos :</strong> Ameni est une professionnelle expérimentée dans le domaine de l'éducation et de la technologie. Elle possède une solide expérience dans la gestion de plateformes d'apprentissage en ligne et dans le développement de contenu pédagogique interactif. Elle est passionnée par l'utilisation de la technologie pour améliorer l'accès à l'éducation et pour soutenir l'apprentissage tout au long de la vie.
+          </p>
+          <p *ngIf="showMoreContent" class="card-text">
+            <strong>Responsabilités :</strong> En tant qu'administratrice de Formaline, Ameni est responsable de la gestion globale de la plateforme. Ses principales responsabilités incluent : - Gestion de la plateforme <br> - Développement du contenu <br> - Suivi des utilisateurs <br> - Assistance et support <br> - Développement stratégique <br> <br>
+            <strong>Qualités :</strong> Compétences techniques avancées en développement web et en gestion de systèmes d'information. Excellentes compétences en communication et en relations interpersonnelles. Capacité à travailler de manière autonome et à prendre des décisions éclairées. Créativité et innovation pour concevoir des solutions éducatives efficaces et engageantes. <br>
+            <strong>Objectifs :</strong> Ameni est déterminée à faire de Formaline une plateforme d'apprentissage en ligne de premier plan, offrant un contenu de haute qualité et une expérience utilisateur exceptionnelle à ses utilisateurs. Elle s'engage à promouvoir l'inclusion et l'équité dans l'éducation en fournissant un accès égal aux ressources éducatives pour tous les apprenants.
+          </p>
+          <button class="btn btn-outline-light" (click)="toggleShowMore()">Voir {{ showMoreContent ? 'moins' : 'plus' }}</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img src="../../assets/ameni.jpg" class="img-fluid rounded-circle float-start" style="width: 480px;" alt="Image arrondie à gauche">
+    </div>
+  </div>
+</div>
+
+<!-- Avis des utilisateurs -->
+<div class="container mt-4">
+  <h2>Les avis de nos utilisateurs :</h2>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let testimonial of testimonials">
+          <div class="card mb-3">
+            <img [src]="testimonial.photoUrl" class="card-img-top" alt="Photo de {{ testimonial.name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ testimonial.name }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ testimonial.occupation }}</h6>
+              <p class="card-text">{{ testimonial.comment }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Section de contact -->
+<!-- <div class="container mt-4">
+  <div class="card bg-danger text-white">
+    <div class="card-body">
+      <h5 class="card-title">Avoir une question?</h5>
+      <p class="card-text">Si vous avez des questions, n'hésitez pas à nous contacter à tout moment.</p>
+      <button class="btn btn-outline-light tn-lg btn-block" (click)="goToContactPage()">Contactez-nous</button>
+    </div>
+  </div>
+</div> -->
+
+<!-- home.component.html -->
+<div class="container mt-5">
+  <h2>Nos partenaires :</h2>
+  <carousel [interval]="1000">
+    <slide *ngFor="let slide of smallSlides">
+      <img [src]="slide.image" alt="Small image slide" class="d-block w-100 small-carousel-image">
+    </slide>
+  </carousel>
+</div>
+
+
+
+
+<!-- Footer avec logo et numéro de téléphone -->
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center">
+    <img src="assets/logo.png" alt="Logo Formaline" class="img-fluid" style="max-width: 150px;">
+    <p style="color: #000000;" class="mb-0">
+      <i class="fa-solid fa-phone"></i> Numéro de téléphone : +216 50491496
+    </p>
+  </div>
+</div>
+

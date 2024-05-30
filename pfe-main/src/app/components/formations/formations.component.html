@@ -1,0 +1,11 @@
+<div class="courses-container">
+    <div *ngFor="let pdf of pdfs" class="course-card">
+      <a [href]="getPdfUrl(pdf)" download="{{ pdf }}">
+        <div class="pdf-icon-container">
+          <img src="assets/pdf-icon.webp" alt="PDF Icon" class="pdf-icon">
+        </div>
+      </a>
+      <p>{{ pdf }}</p> <!-- Affiche le titre du document -->
+    </div>
+  </div>
+  

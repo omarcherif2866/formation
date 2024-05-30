@@ -1,0 +1,16 @@
+
+<div class="container mt-4">
+  <form (submit)="sendMessage()">
+    <div class="form-group">
+      <label for="message">Message:</label>
+      <textarea class="form-control" id="message" name="message" [(ngModel)]="message"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+    <button type="button" class="btn btn-danger" (click)="clearMessages()">Effacer</button>
+  </form>
+  <div class="mt-4">
+    <h5>Messages:</h5>
+    <div *ngFor="let msg of messages">{{ msg }}</div>
+  </div>
+</div>
+

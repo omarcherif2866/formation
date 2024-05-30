@@ -1,0 +1,51 @@
+.courses-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espacement entre les cartes de cours */
+  }
+  
+  .course-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(33.33% - 20px); /* Pour afficher trois cartes par ligne */
+    /* Ajustez la largeur selon vos besoins */
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoutez une ombre */
+  }
+  
+  .course-card button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .course-card button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media screen and (max-width: 768px) {
+    /* Réajuster la largeur des cartes pour les écrans plus petits */
+    .course-card {
+      width: calc(50% - 20px); /* Pour afficher deux cartes par ligne */
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    /* Réajuster la largeur des cartes pour les écrans très petits */
+    .course-card {
+      width: 100%; /* Pour afficher une carte par ligne */
+    }
+  }
+  
+  .pdf-icon {
+    max-width: 100px; /* Largeur maximale de l'image */
+    max-height: 100px; /* Hauteur maximale de l'image */
+  }
+  
+  
+

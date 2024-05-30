@@ -1,0 +1,326 @@
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+  <h3 class="w3-bar-item">Menu</h3>
+  <a class="w3-bar-item w3-button" (click)="showUsers()">Utilisateurs</a>
+  <a  class="w3-bar-item w3-button" (click)="showCourses()">Formations</a>
+  <a  class="w3-bar-item w3-button" (click)="showDomains()">Domaine</a>
+  <a  class="w3-bar-item w3-button" (click)="showCompteur()">Statistiques</a>
+  <a  class="w3-bar-item w3-button" (click)="showFormateur()">Formateurs</a>
+
+
+</div>
+
+<div style="margin-left:25%">
+  <div class="w3-container w3-red">
+    <h1>{{ pageTitle }}</h1>
+  </div>
+
+
+        <!-- Tableau des utilisateurs -->
+        <div *ngIf="displayUsers">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Image</th>
+                      <th>Nom</th>
+                      <th>Adresse</th>
+                      <th>Role</th>
+                      <!-- <th>Action</th> -->
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let user of usr; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>
+                          <img class="mb-1 mx-auto" [ngClass]="{'h-[360px]': fullWidthMode}" [src]="imageUrl || getProfileImageUrl(user.image)" class="img-fluid" alt="profile image" [width]="70" [height]="70" style="border-radius: 100px">
+                      </td>
+                      <td>{{ user.nom }}</td>
+                      <td>{{ user.adresse }}</td>
+                      <td>{{ user.role }}</td>
+                      <!-- <td>
+                          <i class="fas fa-edit mr-2" (click)="editUser(user)" style="color: blue;"></i>
+                          <i class="fas fa-trash" (click)="deleteUser(user._id)" style="margin-left: 35px; color: red;"></i>
+                      </td> -->
+                  </tr>
+              </tbody>
+          </table>
+          <!-- <form *ngIf="afficherForm === 'editUserForm'" [formGroup]="UserForm" style="margin-left: 30px;" (submit)="saveOrUpdateUser()" id="editUserForm">
+            <div class="form-group row input-group-sm mb-3">
+                <label for="nom" class="col-sm-3 col-form-label">Nom</label>
+                <div class="col-sm-9">
+                    <input type="text" id="nom" formControlName="nom" required class="form-control" placeholder="Nom">
+                </div>
+            </div>
+          
+            <div class="form-group row input-group-sm mb-3">
+                <label for="adresse" class="col-sm-3 col-form-label">Adresse</label>
+                <div class="col-sm-9">
+                    <input type="text" id="adresse" formControlName="adresse" required class="form-control" placeholder="Adresse">
+                </div>
+            </div>
+          
+            <div class="form-group row input-group-sm mb-3">
+              <label for="role" class="col-sm-3 col-form-label">Rôle</label>
+              <div class="col-sm-9">
+                <select id="role" formControlName="role" class="form-control" required>
+                  <option value="">Sélectionnez un rôle</option>
+                  <option value="apprenant">Apprenant</option>
+                  <option value="formateur">Formateur</option>
+                </select>
+              </div>
+            </div>
+          
+            <br>
+            <button class="btn btn-primary login-btn" type="submit">Modifier</button>
+            <button class="btn btn login-btn" type="button" (click)="closeForm()" style="margin-left: 11px; color: red;">Annuler</button>
+          </form> -->
+        </div>
+
+
+
+
+        <!-- Tableau des utilisateurs -->
+        <div *ngIf="displayFormateurs">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Image</th>
+                      <th>Nom</th>
+                      <th>Adresse</th>
+                      <th>Fichiers</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let formateur of formateurs; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>
+                          <img class="mb-1 mx-auto" [ngClass]="{'h-[360px]': fullWidthMode}" [src]="imageUrl || getProfileImageUrl(formateur.profil?.image)" class="img-fluid" alt="profile image" [width]="70" [height]="70" style="border-radius: 100px">
+                      </td>
+                      <td>{{ formateur.profil?.nom }}</td>
+                      <td>{{ formateur.profil?.adresse }}</td>
+                      <!-- <td>{{ formateur.fichiers }}</td> -->
+                      <td>
+                        <div class="courses-container">
+                            <div *ngFor="let fichier of formateur.fichiers" class="course-card">
+                                <a [href]="getPdfUrl(fichier)" download="{{ fichier }}">
+                                    <div class="pdf-icon-container">
+                                        <img src="assets/pdf-icon.webp" alt="PDF Icon" class="pdf-icon">
+                                    </div>
+                                </a>
+                                <p>{{ fichier }}</p> <!-- Affiche le titre du document -->
+                            </div>
+                        </div>
+                    </td>
+                      <td>{{ formateur.status }}</td>
+
+                      <td class="d-flex justify-content-center">
+                        <div class="d-inline-flex">
+                            <i class="fas fa-edit mr-2" (click)="editUser(formateur)" style="color: blue;"></i>
+                            <i class="fas fa-trash" (click)="deleteUser(formateur._id)" style="margin-left: 35px; color: red;"></i>
+                        </div>
+                    </td>
+                    
+                  </tr>
+              </tbody>
+          </table>
+          <form *ngIf="afficherForm === 'editformateurForm'" [formGroup]="formateurForm" style="margin-left: 30px;" (submit)="saveOrUpdateUser()" id="editformateurForm">
+
+          
+
+          
+            <div class="form-group row input-group-sm mb-3">
+              <label for="status" class="col-sm-3 col-form-label">Status</label>
+              <div class="col-sm-9">
+                <select id="status" formControlName="status" class="form-control" required>
+                  <option value="">Sélectionnez un status</option>
+                  <option value="En attente">En attente</option>
+                  <option value="Accepté">Accepté</option>
+                  <option value="Rejeté">Rejeté</option>
+
+                </select>
+              </div>
+            </div>
+          
+            <br>
+            <button class="btn btn-primary login-btn" type="submit">Modifier</button>
+            <button class="btn btn login-btn" type="button" (click)="closeForm()" style="margin-left: 11px; color: red;">Annuler</button>
+          </form>
+        </div>        
+
+
+
+
+          <!-- Formulaire de formation -->
+          <div *ngIf="displayCourses">
+            
+              <button type="button" class="btn btn-light" (click)="afficherFormulaire('createForm')">Ajouter formation</button>
+            
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Session</th>
+                    <th>Domaine</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let formt of formations; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ formt.titre }}</td>
+                    <td>{{ formt.description }}</td>
+                    <td>
+                      <div *ngIf="formt.sessionCours">
+                        {{ formt.sessionCours.nomSession }}
+                      </div>
+                    </td>
+                    <td>{{ formt.domaine.type }}</td>
+                    <td>
+                      <i class="fas fa-edit mr-2" (click)="editFormation(formt)" style="color: blue;"></i>
+                      <i class="fas fa-trash" (click)="deleteFormation(formt._id)" style="margin-left: 35px; color: red;"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            
+              <form *ngIf="afficherForm === 'createForm' || afficherForm === 'editForm'"  [formGroup]="FormationForm" style="margin-left: 30px;" (submit)="saveOrUpdate()" id="createForm">
+                <div class="form-group row input-group-sm mb-3">
+                  <label for="titre" class="col-sm-3 col-form-label">Titre</label>
+                  <div class="col-sm-9">
+                    <input type="text" id="titre" formControlName="titre" required class="form-control" placeholder="titre">
+                  </div>
+                </div>
+              
+              
+                <div class="form-group row input-group-sm mb-3">
+                  <label for="description" class="col-sm-3 col-form-label">Description</label>
+                  <div class="col-sm-9">
+                    <input type="text" id="description" formControlName="description" required class="form-control" placeholder="description">
+                  </div>
+                </div>
+              
+                <!-- <div class="form-group">
+                  <input type="file" class="form-control" (change)="onFileSelected($event)">
+              </div> -->
+              
+                <div class="form-group row input-group-sm mb-3">
+                  <label for="domaine" class="col-sm-3 col-form-label">Domaine</label>
+                  <div class="col-sm-9">
+                    <select id="domaine" formControlName="domaine" class="form-control" required>
+                      <option value="">Sélectionnez un domaine</option>
+                      <option *ngFor="let domaine of domaines" [ngValue]="domaine._id">{{ domaine.type }}</option>
+                    </select>
+                  </div>
+                </div>
+              
+                <div class="form-group row input-group-sm mb-3">
+                  <label for="sessionCours" class="col-sm-3 col-form-label">Session</label>
+                  <div class="col-sm-9">
+                    <select id="sessionCours" formControlName="sessionCours" class="form-control" required>
+                      <option value="">Sélectionnez une session</option>
+                      <option *ngFor="let sessionCours of sessionCourss" [ngValue]="sessionCours._id">{{ sessionCours.nomSession }}</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <br>
+                <button class="btn btn-primary login-btn" type="submit">{{ selectedFormation ? 'Modifier' : 'Ajouter' }}</button>
+                <button class="btn btn login-btn" type="button" (click)="closeForm()" style="margin-left: 11px; color: red;">Fermer formulaire</button>
+              </form>
+            
+            
+          
+          
+          </div>
+          
+
+          
+
+          <!-- Formulaire de Domains -->
+          <div *ngIf="displayDomains">
+            
+            <button type="button" class="btn btn-light" (click)="afficherFormulaire('createForm')">Ajouter domaine</button>
+          
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Type</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dmn of domaines; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ dmn.type }}</td>
+                  <td>
+                    <i class="fas fa-edit mr-2" (click)="editDomaine(dmn)" style="color: blue;"></i>
+                    <i class="fas fa-trash" (click)="deleteDomaine(dmn._id)" style="margin-left: 35px; color: red;"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          
+            <form *ngIf="afficherForm === 'createForm' || afficherForm === 'editForm'" [formGroup]="DomaineForm" style="margin-left: 30px;" (submit)="saveOrUpdateDomaine()" id="createForm">
+              <div class="form-group row input-group-sm mb-3">
+                <label for="type" class="col-sm-3 col-form-label">Type</label>
+                <div class="col-sm-9">
+                  <input type="text" id="type" formControlName="type" required class="form-control" placeholder="type">
+                </div>
+              </div>
+              <br>
+              <button class="btn btn-primary login-btn" type="submit">{{ selectedDomaine ? 'Modifier' : 'Ajouter' }}</button>
+              <button class="btn btn login-btn" type="button" (click)="closeForm()" style="margin-left: 11px; color: red;">Fermer formulaire</button>
+            </form>
+          
+          
+
+
+        </div>
+
+
+          <!-- Formulaire de compteur -->
+     
+
+
+          
+            <div *ngIf="displayCompteur">
+              <div style="display: flex;">
+                <!-- Première colonne pour le graphique pieChart -->
+                <div style="flex: 1;">
+                  <canvas id="pieChart" width="100" height="100"></canvas>
+                </div>
+            
+                <!-- Deuxième colonne pour le graphique pieChartPerYear -->
+                <div>
+                  <label for="yearSelect">Choisir une année :</label>
+                  <select id="yearSelect" [(ngModel)]="apprenantyear" (change)="loadDataAndDrawChartPerYear()">
+                    <option *ngFor="let option of yearOptions" [value]="option">{{ option }}</option>
+                  </select>
+                </div>
+                <div style="flex: 1;">
+                  <canvas id="pieChartPerYear"></canvas>
+                </div>
+              </div>
+            
+
+            </div>
+            
+          
+          
+          
+          
+</div>
+
+
+
